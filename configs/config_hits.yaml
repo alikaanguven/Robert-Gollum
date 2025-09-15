@@ -1,0 +1,90 @@
+presel:
+
+new_variables:
+  Hit_Track_eta: 'ROOT::VecOps::Take(SimTrack_eta,Hit_SimTrack_idx)'
+  Hit_resolution_local_x: 'Hit_cluster_local_x-Hit_cluster_closestSimHit_local_x'
+  Hit_resolution_local_y: 'Hit_cluster_local_y-Hit_cluster_closestSimHit_local_y'
+  Hit_resolution_local_z: 'Hit_cluster_local_z-Hit_cluster_closestSimHit_local_z'
+
+regions:
+  All:
+
+event_variables:
+
+event_2d_plots:
+
+objects:
+  SimHits:
+    selections:
+      all:
+      barrel_det1_wSimTrack_match: SimHit_barrelendcap==0 & SimHit_ModuleType==1 & SimHit_SimTrack_idx>=0 & SimHit_n_matched_Hit>0
+      barrel_det2_wSimTrack_match: SimHit_barrelendcap==0 & SimHit_ModuleType==2 & SimHit_SimTrack_idx>=0 & SimHit_n_matched_Hit>0
+      barrel_det3_wSimTrack_match: SimHit_barrelendcap==0 & SimHit_ModuleType==3 & SimHit_SimTrack_idx>=0 & SimHit_n_matched_Hit>0
+      endcap_det1_wSimTrack_match: SimHit_barrelendcap==1 & SimHit_ModuleType==1 & SimHit_SimTrack_idx>=0 & SimHit_n_matched_Hit>0
+      endcap_det2_wSimTrack_match: SimHit_barrelendcap==1 & SimHit_ModuleType==2 & SimHit_SimTrack_idx>=0 & SimHit_n_matched_Hit>0
+      endcap_det3_wSimTrack_match: SimHit_barrelendcap==1 & SimHit_ModuleType==3 & SimHit_SimTrack_idx>=0 & SimHit_n_matched_Hit>0
+      barrel_det1_wSimTrack: SimHit_barrelendcap==0 & SimHit_ModuleType==1 & SimHit_SimTrack_idx>=0
+      barrel_det2_wSimTrack: SimHit_barrelendcap==0 & SimHit_ModuleType==2 & SimHit_SimTrack_idx>=0
+      barrel_det3_wSimTrack: SimHit_barrelendcap==0 & SimHit_ModuleType==3 & SimHit_SimTrack_idx>=0
+      endcap_det1_wSimTrack: SimHit_barrelendcap==1 & SimHit_ModuleType==1 & SimHit_SimTrack_idx>=0
+      endcap_det2_wSimTrack: SimHit_barrelendcap==1 & SimHit_ModuleType==2 & SimHit_SimTrack_idx>=0
+      endcap_det3_wSimTrack: SimHit_barrelendcap==1 & SimHit_ModuleType==3 & SimHit_SimTrack_idx>=0
+      barrel_det1: SimHit_barrelendcap==0 & SimHit_ModuleType==1
+      barrel_det2: SimHit_barrelendcap==0 & SimHit_ModuleType==2
+      barrel_det3: SimHit_barrelendcap==0 & SimHit_ModuleType==3
+      endcap_det1: SimHit_barrelendcap==1 & SimHit_ModuleType==1
+      endcap_det2: SimHit_barrelendcap==1 & SimHit_ModuleType==2
+      endcap_det3: SimHit_barrelendcap==1 & SimHit_ModuleType==3
+    variables:
+      - SimHit_local_x
+      - SimHit_local_y
+      - SimHit_global_x
+      - SimHit_global_y
+      - SimHit_global_z
+      - SimHit_p
+      - SimHit_tof
+      - SimHit_E
+      - SimHit_n_matched_Hit
+    2d_plots:
+
+  RecHits:
+    selections:
+      all:
+      barrel_det1: Hit_layer<1000 & Hit_ModuleType==1
+      barrel_det2: Hit_layer<1000 & Hit_ModuleType==2
+      barrel_det3: Hit_layer<1000 & Hit_ModuleType==3
+      endcap_det1: Hit_layer>=1000 & Hit_ModuleType==1
+      endcap_det2: Hit_layer>=1000 & Hit_ModuleType==2
+      endcap_det3: Hit_layer>=1000 & Hit_ModuleType==3
+      barrel_det1_matched: Hit_layer<1000 & Hit_ModuleType==1 & Hit_cluster_haveSimHit==1
+      barrel_det2_matched: Hit_layer<1000 & Hit_ModuleType==2 & Hit_cluster_haveSimHit==1
+      barrel_det3_matched: Hit_layer<1000 & Hit_ModuleType==3 & Hit_cluster_haveSimHit==1
+      endcap_det1_matched: Hit_layer>=1000 & Hit_ModuleType==1 & Hit_cluster_haveSimHit==1 
+      endcap_det2_matched: Hit_layer>=1000 & Hit_ModuleType==2 & Hit_cluster_haveSimHit==1 
+      endcap_det3_matched: Hit_layer>=1000 & Hit_ModuleType==3 & Hit_cluster_haveSimHit==1 
+    variables:
+      - Hit_cluster_size
+      - Hit_cluster_local_x
+      - Hit_cluster_local_y
+      - Hit_resolution_local_x
+      - Hit_resolution_local_y
+      - Hit_Track_eta
+    2d_plots:
+      - [Hit_cluster_size, Hit_Track_eta]
+
+plot_setting:
+  SimHit_local_x: [SimHit_local_x,';SimHit local x (cm);A.U.',100,-5,5]
+  SimHit_local_y: [SimHit_local_y,';SimHit local y (cm);A.U.',100,-5,5]
+  SimHit_global_x: [SimHit_global_x,';SimHit global x (cm);A.U.',240,-120,120]
+  SimHit_global_y: [SimHit_global_y,';SimHit global y (cm);A.U.',240,-120,120]
+  SimHit_global_z: [SimHit_global_z,';SimHit global z (cm);A.U.',300,-300,300]
+  SimHit_p: [SimHit_p,';SimHit pT (GeV);A.U',100,0,100]
+  SimHit_tof: [SimHit_tof,';SimHit tof;A.U',100,0,50]
+  SimHit_E: [SimHit_E,';SimHit energy loss (unknow unit :-|);A.U',100,0,0.002]
+  SimHit_n_matched_Hit: [SimHit_n_matched_Hit,';SimHit number of matched RecHits;A.U.',10,0,10]
+  Hit_cluster_size: [Hit_cluster_size,';Cluster size;A.U.',50,0,50]
+  Hit_cluster_local_x: [Hit_cluster_local_x,';RecHit local x (cm);A.U.',100,-5,5]
+  Hit_cluster_local_y: [Hit_cluster_local_y,';RecHit local y (cm);A.U.',100,-5,5]
+  Hit_resolution_local_x: [Hit_resolution_local_x,';RecHit local x resolution (cm);A.U.',500,-0.05,0.05]
+  Hit_resolution_local_y: [Hit_resolution_local_y,';RecHit local y resolution (cm);A.U.',1000,-5,5]
+  Hit_Track_eta: [Hit_Track_eta,';RecHit matched SimTrack #eta;A.U.',100,-5,5]
