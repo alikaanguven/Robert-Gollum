@@ -86,14 +86,14 @@ class Plotter:
     d = d.Define("evt_weight","{0}".format(weight))
     return d
   
-  def getRDF(self):
+  def getRDF(self, treeName="analysis/HitTree"):
     '''
     This function gets RDataFrame for a given sample
     - Add desired variables
     - Filter events
     - Produce normalisation weights based on xsec
     '''
-    d = ROOT.RDataFrame("analysis/HitTree",self.filelist)
+    d = ROOT.RDataFrame(treeName,self.filelist)
     d = self.AddVars(d)
     d = self.AddVarsWithSelection(d)
     if self.cfg['presel'] is not None:
@@ -161,12 +161,12 @@ class Plotter:
 
     return hs
 
-  def makeHistFiles(self):
+  def makeHistFiles(self, treeName="analysis/HitTree"):
       if not os.path.exists(self.outputDir):
           os.makedirs(self.outputDir)
       fout = ROOT.TFile("{}/{}_hist{}.root".format(self.outputDir,self.name,self.postfix),"RECREATE")
       self.getFileList()
-      d,w = self.getRDF()
+      d,w = self.getRDF(treeName)
 
       for sr in self.cfg['regions']:
         d_sr = d

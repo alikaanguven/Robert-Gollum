@@ -2,7 +2,9 @@ import os,sys
 import math
 import uuid
 import shutil
-sys.path.append('/users/ang.li/public/Phase2Traker/Plotter/python')
+# sys.path.append('/users/alikaan.gueven/Gollum/CMSSW_13_3_0/src/Plotter/python/plotter.py')
+# print(sys.path)
+sys.path.append(os.path.join(os.path.dirname(__file__), "python"))
 import plotter as p
 
 import argparse
@@ -135,5 +137,5 @@ if __name__=="__main__":
 
   else:
     plotter = p.Plotter(name=args.name,outputDir=args.output,input_filelist=args.filelist,config=args.config,isData=args.data,postfix=args.postfix)
-    plotter.makeHistFiles()
+    plotter.makeHistFiles(treeName="Events")
 
