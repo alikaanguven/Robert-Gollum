@@ -38,11 +38,10 @@ input_dict = {
 
 
 autoplotter_path = "$CMSSW_BASE/src/Plotter/autoplotter.py"
-config =           "$CMSSW_BASE/src/Plotter/configs/gluon.yaml"
-
+config           = "$CMSSW_BASE/src/Plotter/configs/gluon2.yaml"
+unique_dir       = "test4"
 
 work_dir = os.path.join("/scratch-cbe/users/alikaan.gueven/Gollum/plots")
-unique_dir  = "test1"
 outBaseDir = os.path.join(work_dir, str(unique_dir))
 
 files_per_job = 2
@@ -65,7 +64,7 @@ for sampleName, sampleDir in input_dict.items():
     # ------------------------------------------------------------
 
     files = glob.glob(sampleDir + "/**/*.root", recursive=True)
-    print(sampleDir)
+    print("Reading ", sampleDir)
     len_files = len(files)
     chunks = [files[i:i+files_per_job] for i in range(0, len(files), files_per_job)]
     for i, chunk in enumerate(chunks):

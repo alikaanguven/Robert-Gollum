@@ -6,7 +6,7 @@
 #SBATCH --job-name=autoplotter
 #SBATCH --output=/scratch-cbe/users/alikaan.gueven/job_outs/job_%j.out 
 #SBATCH --ntasks 1 
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=2
 #SBATCH --mem-per-cpu=250M 
 #SBATCH --nodes=1-1 
 #SBATCH --partition=c 

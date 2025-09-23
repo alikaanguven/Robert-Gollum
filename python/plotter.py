@@ -10,6 +10,11 @@ ROOT.gROOT.SetBatch(ROOT.kTRUE)
 ROOT.TH1.SetDefaultSumw2(True)
 ROOT.gStyle.SetOptStat(0)
 
+import sys
+from pathlib import Path
+Plotter_dir = Path(__file__).resolve().parents[1]
+ROOT.gInterpreter.Declare(f'#include "{os.path.join(Plotter_dir, "RDFHelper_lightweight.h")}"')
+
 class Plotter:
   def __init__(self,name,outputDir="./",input_filelist=None,config="",isData=False,postfix=""):
     self.name = name 

@@ -19,7 +19,7 @@ run_compareK(){
     mkdir -p $LOGPNGDIR
 
 
-    python3 compare.py                                                               \
+    python3 compare_modified.py                                                      \
     --input $SIGNAL                                                                  \
     --dirs $@                                                                        \
     --nice $@                                                                        \
@@ -31,9 +31,9 @@ run_compareK(){
     mv $OUTDIR/*.png            $PNGDIR
 }
 
-HISTDIR=/scratch-cbe/users/alikaan.gueven/Gollum/plots/test1/TT2lUnbinned_2016
+HISTDIR=/scratch-cbe/users/alikaan.gueven/Gollum/plots/test4/TT2lUnbinned_2016
 
 
-run_compareK "" TT2lUnbinned_2016  gluon20_evt gluon40_evt gluon60_evt gluon80_evt gluon100_evt
+run_compareK "" TT2lUnbinned_2016  gluon_0_evt gluon_1_evt gluon_2_evt gluon_3_evt gluon_4_evt
 
 
